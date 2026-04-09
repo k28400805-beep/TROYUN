@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="game.js" defer></script>
 </head>
 <body>
-    <h1>Welcome to the Snake Game!</h1>
+    <h1>Snake Game</h1>
+    <div id="score">Score: 0</div>
+    <div id="level">Level: 1</div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="controls">
+        <button id="startBtn">Start</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+    <script src="game.js"></script>
 </body>
 </html>
