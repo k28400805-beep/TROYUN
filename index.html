@@ -3,19 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game</title>
+    <title>TROYUN - Snake Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Snake Game</h1>
-    <div id="score">Score: 0</div>
-    <div id="level">Level: 1</div>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <div id="controls">
-        <button id="startBtn">Start</button>
-        <button id="pauseBtn">Pause</button>
-        <button id="resetBtn">Reset</button>
+    <h1>🐍 TROYUN - Snake Game</h1>
+    
+    <div class="info">
+        <div>Skor: <span id="score">0</span></div>
+        <div>Seviye: <span id="level">1</span></div>
     </div>
+
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <div class="controls">
+        <button id="startBtn">Başla</button>
+        <button id="pauseBtn">Duraklat</button>
+        <button id="resetBtn">Sıfırla</button>
+    </div>
+
+    <div id="mobileControls">
+        <div></div>
+        <button id="upBtn">⬆️</button>
+        <div></div>
+        <button id="leftBtn">⬅️</button>
+        <button id="downBtn">⬇️</button>
+        <button id="rightBtn">➡️</button>
+    </div>
+
     <script src="game.js"></script>
 </body>
 </html>
