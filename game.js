@@ -6,7 +6,11 @@ const startBtn = document.getElementById('startBtn');
 const pauseBtn = document.getElementById('pauseBtn');
 const resetBtn = document.getElementById('resetBtn');
 
-// Oyun Değişkenleri
+const upBtn = document.getElementById('upBtn');
+const downBtn = document.getElementById('downBtn');
+const leftBtn = document.getElementById('leftBtn');
+const rightBtn = document.getElementById('rightBtn');
+
 const gridSize = 20;
 const tileCount = canvas.width / gridSize;
 
@@ -20,38 +24,23 @@ let gameRunning = false;
 let gamePaused = false;
 let gameSpeed = 100;
 
-// Oyun Döngüsü
 let gameLoopInterval;
 
 function drawGame() {
-    // Arka planı temizle
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Yılanı çiz
     ctx.fillStyle = '#00ff00';
     snake.forEach((segment, index) => {
-        if (index === 0) {
-            ctx.fillStyle = '#00ff00';
-        } else {
-            ctx.fillStyle = '#00cc00';
-        }
+        ctx.fillStyle = index === 0 ? '#00ff00' : '#00cc00';
         ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
     });
 
-    // Elmayı çiz
     ctx.fillStyle = '#ff0000';
     ctx.beginPath();
-    ctx.arc(
-        food.x * gridSize + gridSize / 2,
-        food.y * gridSize + gridSize / 2,
-        gridSize / 2 - 2,
-        0,
-        Math.PI * 2
-    );
+    ctx.arc(food.x * gridSize + gridSize / 2, food.y * gridSize + gridSize / 2, gridSize / 2 - 2, 0, Math.PI * 2);
     ctx.fill();
 
-    // Izgara çiz (opsiyonel)
     ctx.strokeStyle = '#222';
     ctx.lineWidth = 0.5;
     for (let i = 0; i <= tileCount; i++) {
@@ -71,17 +60,13 @@ function updateGame() {
     if (!gameRunning || gamePaused) return;
 
     direction = nextDirection;
-
-    // Yeni başı hesapla
     const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
 
-    // Duvar Çarpışması Kontrolü
     if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
         endGame();
         return;
     }
 
-    // Kendine Çarpışma Kontrolü
     if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
         endGame();
         return;
@@ -89,13 +74,11 @@ function updateGame() {
 
     snake.unshift(head);
 
-    // Elma Yeme Kontrolü
     if (head.x === food.x && head.y === food.y) {
         score += 10 * level;
         scoreDisplay.textContent = score;
         generateFood();
         
-        // Level Artış
         if (score % 50 === 0) {
             level++;
             levelDisplay.textContent = level;
@@ -167,7 +150,6 @@ function endGame() {
     resetGame();
 }
 
-// Keyboard Kontrolü
 document.addEventListener('keydown', (e) => {
     if (!gameRunning && e.key !== ' ') return;
 
@@ -198,11 +180,43 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Buton Event Listeners
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+});
+
+document.addEventListener('touchmove', (e) => {
+    if (!gameRunning) return;
+    
+    const touchEndX = e.touches[0].clientX;
+    const touchEndY = e.touches[0].clientY;
+    
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+    
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX > 0 && direction.x === 0) nextDirection = { x: 1, y: 0 };
+        if (diffX < 0 && direction.x === 0) nextDirection = { x: -1, y: 0 };
+    } else {
+        if (diffY > 0 && direction.y === 0) nextDirection = { x: 0, y: 1 };
+        if (diffY < 0 && direction.y === 0) nextDirection = { x: 0, y: -1 };
+    }
+    
+    touchStartX = touchEndX;
+    touchStartY = touchEndY;
+});
+
+if (upBtn) upBtn.addEventListener('click', () => { if (direction.y === 0) nextDirection = { x: 0, y: -1 }; });
+if (downBtn) downBtn.addEventListener('click', () => { if (direction.y === 0) nextDirection = { x: 0, y: 1 }; });
+if (leftBtn) leftBtn.addEventListener('click', () => { if (direction.x === 0) nextDirection = { x: -1, y: 0 }; });
+if (rightBtn) rightBtn.addEventListener('click', () => { if (direction.x === 0) nextDirection = { x: 1, y: 0 }; });
+
 startBtn.addEventListener('click', startGame);
 pauseBtn.addEventListener('click', pauseGame);
 resetBtn.addEventListener('click', resetGame);
 
-// İlk Çizim
 generateFood();
 drawGame();
