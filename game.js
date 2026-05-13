@@ -16,9 +16,9 @@ const playerRankDisplay = document.getElementById('playerRank');
 const leaderboardList = document.getElementById('leaderboardList');
 
 // Game Variables
-const CANVAS_WIDTH = 1000;
-const CANVAS_HEIGHT = 600;
-const GRID_SIZE = 15;
+const CANVAS_WIDTH = 1600;
+const CANVAS_HEIGHT = 1000;
+const GRID_SIZE = 20;
 
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
@@ -104,13 +104,13 @@ class Snake {
         const head = this.segments[0];
         ctx.fillStyle = '#fff';
         const eyeOffsets = [
-            { x: 3, y: 3 },
-            { x: 10, y: 3 }
+            { x: 5, y: 5 },
+            { x: 15, y: 5 }
         ];
         
         eyeOffsets.forEach(offset => {
             ctx.beginPath();
-            ctx.arc(head.x * GRID_SIZE + offset.x, head.y * GRID_SIZE + offset.y, 2, 0, Math.PI * 2);
+            ctx.arc(head.x * GRID_SIZE + offset.x, head.y * GRID_SIZE + offset.y, 2.5, 0, Math.PI * 2);
             ctx.fill();
         });
     }
@@ -200,7 +200,7 @@ function randomFood() {
 }
 
 function spawnFood() {
-    if (gameState.foods.length < 30) {
+    if (gameState.foods.length < 50) {
         gameState.foods.push(randomFood());
     }
 }
@@ -236,8 +236,8 @@ function initGame() {
 
     // Botlar
     gameState.bots = [];
-    const botCount = gameState.difficulty === 'easy' ? 3 : gameState.difficulty === 'medium' ? 7 : 15;
-    const botColors = ['#ff0000', '#0099ff', '#ff00ff', '#ffff00', '#ff8800', '#00ffff', '#00ff00', '#ff69b4', '#00ff88', '#ff00ff', '#ffaa00', '#00aaff', '#ff0088', '#88ff00', '#0088ff'];
+    const botCount = gameState.difficulty === 'easy' ? 5 : gameState.difficulty === 'medium' ? 10 : 20;
+    const botColors = ['#ff0000', '#0099ff', '#ff00ff', '#ffff00', '#ff8800', '#00ffff', '#00ff00', '#ff69b4', '#00ff88', '#ff00ff', '#ffaa00', '#00aaff', '#ff0088', '#88ff00', '#0088ff', '#ff00aa', '#00ffaa', '#aaffff', '#ffaaff', '#aaffaa'];
 
     for (let i = 0; i < botCount; i++) {
         const x = Math.floor(Math.random() * (CANVAS_WIDTH / GRID_SIZE));
@@ -248,7 +248,7 @@ function initGame() {
 
     // Yiyecek
     gameState.foods = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 40; i++) {
         gameState.foods.push(randomFood());
     }
 
