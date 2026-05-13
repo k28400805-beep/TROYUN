@@ -1,34 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TROYUN - Snake Game</title>
+    <title>TROYUN - Snake.io</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>🐍 TROYUN - Snake Game</h1>
-    
-    <div class="info">
-        <div>Skor: <span id="score">0</span></div>
-        <div>Seviye: <span id="level">1</span></div>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="hud">
+            <div id="playerInfo">
+                <div id="playerName" class="info-box">Oyuncu</div>
+                <div id="playerScore" class="info-box">Skor: 0</div>
+                <div id="playerRank" class="info-box">Sırası: -</div>
+            </div>
+            
+            <div id="leaderboard">
+                <div class="leaderboard-title">🏆 LIDER TABLOSU</div>
+                <div id="leaderboardList"></div>
+            </div>
+
+            <div id="controls">
+                <button id="menuBtn" class="menu-btn">📋 MENU</button>
+            </div>
+        </div>
     </div>
 
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <!-- MENU -->
+    <div id="menuScreen" class="modal">
+        <div class="menu-content">
+            <h1>🐍 TROYUN - SNAKE.IO</h1>
+            
+            <div class="menu-section">
+                <h2>Oyuncu Adı</h2>
+                <input type="text" id="playerNameInput" placeholder="Adını gir..." maxlength="15">
+            </div>
 
-    <div class="controls">
-        <button id="startBtn">Başla</button>
-        <button id="pauseBtn">Duraklat</button>
-        <button id="resetBtn">Sıfırla</button>
+            <div class="menu-section">
+                <h2>Avatar Seç</h2>
+                <div class="avatar-grid">
+                    <button class="avatar-btn" data-color="#00ff00" style="background: linear-gradient(135deg, #00ff00, #00aa00);">🟢</button>
+                    <button class="avatar-btn" data-color="#ff0000" style="background: linear-gradient(135deg, #ff0000, #aa0000);">🔴</button>
+                    <button class="avatar-btn" data-color="#0099ff" style="background: linear-gradient(135deg, #0099ff, #0066ff);">🔵</button>
+                    <button class="avatar-btn" data-color="#ff00ff" style="background: linear-gradient(135deg, #ff00ff, #aa00aa);">💜</button>
+                    <button class="avatar-btn" data-color="#ffff00" style="background: linear-gradient(135deg, #ffff00, #cccc00);">💛</button>
+                    <button class="avatar-btn" data-color="#ff8800" style="background: linear-gradient(135deg, #ff8800, #cc6600);">🟠</button>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <h2>Zorluk Seçin</h2>
+                <div class="difficulty-grid">
+                    <button class="difficulty-btn" data-difficulty="easy">
+                        <div class="difficulty-name">KOLAY</div>
+                        <div class="difficulty-desc">3 Bot</div>
+                    </button>
+                    <button class="difficulty-btn" data-difficulty="medium">
+                        <div class="difficulty-name">ORTA</div>
+                        <div class="difficulty-desc">7 Bot</div>
+                    </button>
+                    <button class="difficulty-btn" data-difficulty="hard">
+                        <div class="difficulty-name">ZOR</div>
+                        <div class="difficulty-desc">15 Bot</div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <button id="startGameBtn" class="start-btn">OYUNA BAŞLA 🚀</button>
+            </div>
+
+            <div class="menu-section">
+                <div class="instructions">
+                    <h3>Kontroller:</h3>
+                    <p>⬆️ ⬇️ ⬅️ ➡️ veya WASD</p>
+                    <p>Yiyecek ye, büyü, diğerlerini devir!</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id="mobileControls">
-        <div></div>
-        <button id="upBtn">⬆️</button>
-        <div></div>
-        <button id="leftBtn">⬅️</button>
-        <button id="downBtn">⬇️</button>
-        <button id="rightBtn">➡️</button>
+    <!-- GAME OVER SCREEN -->
+    <div id="gameOverScreen" class="modal">
+        <div class="game-over-content">
+            <h1>OYUN BİTTİ</h1>
+            <div id="finalStats">
+                <p>Adın: <span id="finalName">-</span></p>
+                <p>Final Skor: <span id="finalScore">0</span></p>
+                <p>Son Sırası: <span id="finalRank">-</span></p>
+                <p>Uzunluk: <span id="finalLength">0</span></p>
+            </div>
+            <button id="restartBtn" class="start-btn">YENİDEN BAŞLA 🔄</button>
+        </div>
     </div>
 
     <script src="game.js"></script>
