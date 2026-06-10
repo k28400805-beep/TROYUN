@@ -69,16 +69,21 @@ class Snake {
 
         this.segments.unshift(head);
 
-        // Yiyecek yeme
+        // Yiyecek yeme - Fixed logic
+        let foodEaten = false;
         for (let i = 0; i < gameState.foods.length; i++) {
             const food = gameState.foods[i];
             if (head.x === food.x && head.y === food.y) {
                 this.score += food.value;
                 gameState.foods.splice(i, 1);
+                foodEaten = true;
                 break;
-            } else {
-                this.segments.pop();
             }
+        }
+        
+        // Eğer yiyecek yenmemişse, kuyruk kısalt
+        if (!foodEaten) {
+            this.segments.pop();
         }
     }
 
@@ -237,7 +242,7 @@ function initGame() {
     // Botlar
     gameState.bots = [];
     const botCount = gameState.difficulty === 'easy' ? 5 : gameState.difficulty === 'medium' ? 10 : 20;
-    const botColors = ['#ff0000', '#0099ff', '#ff00ff', '#ffff00', '#ff8800', '#00ffff', '#00ff00', '#ff69b4', '#00ff88', '#ff00ff', '#ffaa00', '#00aaff', '#ff0088', '#88ff00', '#0088ff', '#ff00aa', '#00ffaa', '#aaffff', '#ffaaff', '#aaffaa'];
+    const botColors = ['#ff0000', '#0099ff', '#ff00ff', '#ffff00', '#ff8800', '#00ffff', '#00ff00', '#ff69b4', '#00ff88', '#ff00ff', '#ffaa00', '#00aaff', '#ff0088', '#88ff00', '#0088ff', '#ff00aa', '#88ffff', '#ffff88', '#ff8888', '#88ff88'];
 
     for (let i = 0; i < botCount; i++) {
         const x = Math.floor(Math.random() * (CANVAS_WIDTH / GRID_SIZE));
