@@ -29,19 +29,19 @@
     </div>
 
     <!-- MENU -->
-    <div id="menuScreen" class="modal">
+    <div id="menuScreen" class="modal" style="display: flex;">
         <div class="menu-content">
             <h1>🐍 TROYUN - SNAKE.IO</h1>
             
             <div class="menu-section">
                 <h2>Oyuncu Adı</h2>
-                <input type="text" id="playerNameInput" placeholder="Adını gir..." maxlength="15">
+                <input type="text" id="playerNameInput" placeholder="Adını gir..." maxlength="15" value="Oyuncu">
             </div>
 
             <div class="menu-section">
                 <h2>Avatar Seç</h2>
                 <div class="avatar-grid">
-                    <button class="avatar-btn" data-color="#00ff00" style="background: linear-gradient(135deg, #00ff00, #00aa00);">🟢</button>
+                    <button class="avatar-btn" data-color="#00ff00" style="background: linear-gradient(135deg, #00ff00, #00aa00); border: 3px solid #fff;">🟢</button>
                     <button class="avatar-btn" data-color="#ff0000" style="background: linear-gradient(135deg, #ff0000, #aa0000);">🔴</button>
                     <button class="avatar-btn" data-color="#0099ff" style="background: linear-gradient(135deg, #0099ff, #0066ff);">🔵</button>
                     <button class="avatar-btn" data-color="#ff00ff" style="background: linear-gradient(135deg, #ff00ff, #aa00aa);">💜</button>
@@ -53,17 +53,17 @@
             <div class="menu-section">
                 <h2>Zorluk Seçin</h2>
                 <div class="difficulty-grid">
-                    <button class="difficulty-btn" data-difficulty="easy">
+                    <button class="difficulty-btn" data-difficulty="easy" style="background: rgba(0, 255, 0, 0.3);">
                         <div class="difficulty-name">KOLAY</div>
-                        <div class="difficulty-desc">3 Bot</div>
+                        <div class="difficulty-desc">5 Bot</div>
                     </button>
                     <button class="difficulty-btn" data-difficulty="medium">
                         <div class="difficulty-name">ORTA</div>
-                        <div class="difficulty-desc">7 Bot</div>
+                        <div class="difficulty-desc">10 Bot</div>
                     </button>
                     <button class="difficulty-btn" data-difficulty="hard">
                         <div class="difficulty-name">ZOR</div>
-                        <div class="difficulty-desc">15 Bot</div>
+                        <div class="difficulty-desc">20 Bot</div>
                     </button>
                 </div>
             </div>
