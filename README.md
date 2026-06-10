@@ -13,7 +13,7 @@ TROYUN, oyuncuların çeşitli zorluklarla karşılaştığı heyecan verici bir
 - **Yürüyüş**: W/A/S/D tuşları.
 - **Zıplama**: Boşluk tuşu.
 - **Saldırma**: F tuşu.
-- **Hedef Alma**: Sa�� fare tuşu.
+- **Hedef Alma**: Sağ fare tuşu.
 
 ## Nasıl Oynanır
 1. **Oyun Başlatma**: Ana menüden "Oyna" seçeneğini seçin.
